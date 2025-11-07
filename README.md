@@ -21,11 +21,16 @@ Clustering evaluation metrics include **Accuracy (ACC)**, **Normalized Mutual In
 
 ---
 
+
 ## Environment Setup
 
 You can reproduce the environment using either `conda` or `pip`:
 
 ### Using Conda
-```bash
+bash
 conda env create -f hpcc_projenv.yml
 conda activate MGM
+
+---
+
+## Citation
