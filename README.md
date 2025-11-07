@@ -1,4 +1,4 @@
-# Multiscale Grassmann Manifold (MGM)
+# Multiscale Grassmanns Manifold (MGM)
 
 This repository contains the implementation of the **Multiscale Grassmann Manifolds (MGM)** framework for Single-Cell Data Analysis.
 
