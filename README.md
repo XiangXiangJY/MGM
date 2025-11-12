@@ -18,6 +18,7 @@ Clustering evaluation metrics include **Accuracy (ACC)**, **Normalized Mutual In
 | `main_MGMavgpurity.py` | Main script including the **average Purity** metric computation. |
 | `hpcc_projenv.yml` | Environment configuration file used for running experiments on the Michigan State University (MSU) HPCC system. |
 | `requirement.txt` | Lists the Python package versions used in this project. |
+| `Supporting Information.pdf` | Supplementary materials, including additional algorithmic details, mathematical derivations, parameter settings, and extended experimental results.  |
 
 ---
 
