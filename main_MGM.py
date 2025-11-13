@@ -780,7 +780,7 @@ def run_one(data_name, out_dim, distance, subspace_dim,
     g_acc = acc_score(y, labels)
     print(f"[Grassmann-{cluster_method}] ACC={g_acc:.4f}  ARI={g_ari:.4f}  NMI={g_nmi:.4f}  Purity={g_pur:.4f}")
 
-    # --- Baselines (同一 seed) ---
+    
     b_umap = baseline_umap_compare(
         X_pca, y, scales=auto_scales, out_dim=out_dim,
         random_state=seed,
@@ -802,7 +802,7 @@ def run_one(data_name, out_dim, distance, subspace_dim,
         cluster_method=cluster_method, gamma=GAMMA, random_state=seed
     )
 
-    # 返回该 seed 的一行结果
+  
     row = OrderedDict()
     row["data"] = data_name
     row["n"] = int(n)
@@ -868,7 +868,7 @@ def main():
             "name out_dim distance subspace_dim pca_dim cluster_method n_scales mode min_cap max_cap"
         )
 
-    aggregated_rows = []  # 仅保存不同 seeds 的平均值（没有 std / 明细）
+    aggregated_rows = [] 
 
     for cfg in run_cfgs:
         per_seed_rows = []
@@ -892,18 +892,18 @@ def main():
                 print(f"[Error] dataset={cfg['name']} seed={seed}: {repr(e)}")
                 per_seed_rows.append(OrderedDict(data=cfg["name"], seed=seed, error=str(e)))
 
-        # ---- 仅计算均值（去掉所有偏差/方差/明细）----
+  
         rows_ok = [r for r in per_seed_rows if "error" not in r]
         if not rows_ok:
             aggregated_rows.append(OrderedDict(data=cfg["name"], error="all seeds failed"))
             continue
 
         base = rows_ok[0].copy()
-        # 移除 seed，仅保留 seeds 列作为记录
+       
         base.pop("seed", None)
         base["seeds"] = ",".join(str(r["seed"]) for r in rows_ok)
 
-        # 指标列表（含新增 RAW→PCA(out_dim)）
+ 
         metric_keys = [
             "G_ACC","G_ARI","G_NMI","G_Purity",
             "B_ACC","B_ARI","B_NMI","B_Purity",
@@ -924,7 +924,7 @@ def main():
 
     preferred = ["data","n","pca_dim","scales","out_dim","distance","subspace_dim",
                  "gamma","cluster_method","scale_mode","n_scales","min_cap","max_cap",
-                 "seeds",  # 记录参与平均的 seeds
+                 "seeds", 
                  "G_ACC","G_ARI","G_NMI","G_Purity",
                  "B_ACC","B_ARI","B_NMI","B_Purity",
                  "PCA_ACC","PCA_ARI","PCA_NMI","PCA_Purity",
@@ -961,7 +961,7 @@ def main():
             print(f"[Warn] Excel engine '{engine}' not available or failed: {e}")
             continue
 
-    # 打印 summary（only means）
+    
     print_summary_table(aggregated_rows, ordered_keys)
     print(f"[Summary Means] wrote:\n  {csv_path}")
     if wrote_xlsx:
