@@ -812,7 +812,7 @@ def run_one(data_name, out_dim, distance, subspace_dim,
         cluster_method=cluster_method, gamma=GAMMA, random_state=seed
     )
 
-    # 返回该 seed 的一行结果
+   
     row = OrderedDict()
     row["data"] = data_name
     row["n"] = int(n)
@@ -866,7 +866,7 @@ def main():
             "name out_dim distance subspace_dim pca_dim cluster_method n_scales mode min_cap max_cap"
         )
 
-    aggregated_rows = []  # 仅保存不同 seeds 的平均值（没有 std / 明细）
+    aggregated_rows = [] 
 
     for cfg in run_cfgs:
         per_seed_rows = []
@@ -890,7 +890,7 @@ def main():
                 print(f"[Error] dataset={cfg['name']} seed={seed}: {repr(e)}")
                 per_seed_rows.append(OrderedDict(data=cfg["name"], seed=seed, error=str(e)))
 
-        # ---- 仅计算均值 ----
+   
         rows_ok = [r for r in per_seed_rows if "error" not in r]
         if not rows_ok:
             aggregated_rows.append(OrderedDict(data=cfg["name"], error="all seeds failed"))
@@ -900,7 +900,7 @@ def main():
         base.pop("seed", None)
         base["seeds"] = ",".join(str(r["seed"]) for r in rows_ok)
 
-        # 我们只平均这五个指标
+       
         metric_keys = [
             "G_AvgPurity",
             "B_AvgPurity",
